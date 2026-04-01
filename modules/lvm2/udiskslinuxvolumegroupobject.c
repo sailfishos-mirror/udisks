@@ -818,6 +818,9 @@ poll_vg_update (GObject      *source_obj,
       volume = g_hash_table_lookup (object->logical_volumes, lv_name);
       if (volume)
         udisks_linux_logical_volume_object_update (volume, lv_info, meta_lv_info, lvs, vdo_info, &needs_polling);
+
+      if (vdo_info)
+        bd_lvm_vdopooldata_free (vdo_info);
     }
 
   lv_list_free (lvs);
