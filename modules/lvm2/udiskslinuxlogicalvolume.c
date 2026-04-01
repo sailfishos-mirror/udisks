@@ -1212,7 +1212,10 @@ handle_cache_detach_or_split (UDisksLogicalVolume    *volume_,
       goto out;
     }
 
-  udisks_logical_volume_complete_cache_split (volume_, invocation);
+  if (destroy)
+    udisks_logical_volume_complete_cache_detach (volume_, invocation);
+  else
+    udisks_logical_volume_complete_cache_split (volume_, invocation);
 out:
   g_clear_object (&object);
 
