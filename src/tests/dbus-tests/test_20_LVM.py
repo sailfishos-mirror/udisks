@@ -576,6 +576,9 @@ class UdisksLVMTest(UDisksLVMTestBase):
         _ret, out = self.run_command('pvs --noheadings -o vg_name %s' % self.vdevs[0])
         self.assertEqual(out, '')
 
+        # the device is no longer part of the VG so normal cleanup won't remove the PV signature
+        _ret, _out = self.run_command('pvremove %s' % self.vdevs[0])
+
     def test_devices_file(self):
         '''Test that we correctly handle the LVM devices file'''
 
